@@ -1,0 +1,14 @@
+.efeito:hover {
+
+    transition: all 0.5s;
+    transform: scale(1.15);
+}
+
+.efeito {
+
+    transition: all 1s;
+}
+
+.product-description{
+    font-family: Gill Sans, sans-serif;
+}

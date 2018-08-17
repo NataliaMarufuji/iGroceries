@@ -1,0 +1,30 @@
+<p *ngIf="mensagem.length" class="alert alert-danger">{{mensagem}}</p>
+<div class="row">
+    <div [ngClass]="{'col-md-11': menuLogin, 'filtroMenu': !menuLogin}" class="filtro">
+        <form>
+            <div>
+                <input #textoProcurado (keyup)="0" class="form-control" placeholder="filtrar pelo título do produto">
+            </div>
+        </form>
+    </div> <!-- fim col-md-12 -->
+</div> <!-- fim row -->
+<br>
+
+<div class="col-md-12">
+    <div *ngIf="requisicaoSendoRealizada"class="loader preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+            <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+            </div><div class="circle-clipper right">
+            <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+        
+    <painel #painel *ngFor="let produto of produtos | filtroPorTitulo: textoProcurado.value" 
+    titulo="{{produto.nome | uppercase }}" productId="{{produto.id}}" imagemProduto="{{produto.foto}}" [ngClass]="{'col-md-6': menuLogin, 'col-md-3': !menuLogin}">
+        <produto valor="{{produto.valor}}" nome="{{produto.nome}}" quantidade="{{produto.quantidade}}" dataValidade="{{produto.validade}}"></produto> 
+    </painel>
+</div>

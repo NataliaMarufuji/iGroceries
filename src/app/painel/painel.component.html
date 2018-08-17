@@ -1,0 +1,21 @@
+<div class="col s12 m3">
+    <div class="card-panel grey lighten-5 z-depth-1 hoverable">
+    <div class="row valign-wrapper">
+        <div class="col s4">
+            <img src="{{imagemProduto}}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+        </div>
+        <div class="col s8">
+            <span class="black-text">
+                <ng-content></ng-content> 
+            </span>
+        </div>
+    </div>
+    <div class="input-field col s12">
+        <select id="{{productId}}" #selectedCategory >
+            <option *ngFor="let combo of combos" [value]="combo">{{combo}}</option>
+        </select>
+    </div>
+    <a class="btn-floating btn-small red right" (click)="adicionarNoCarrinho(selectedCategory.value)"><i class="material-icons">add</i></a>    
+    </div> 
+ </div>
+

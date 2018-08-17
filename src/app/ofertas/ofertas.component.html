@@ -1,0 +1,44 @@
+<nav class="nav-extended green darken-4">
+        <div class="nav-wrapper">
+          <a [routerLink]="['/menu']" class="brand-logo"><i class="material-icons left logo">broken_image</i>iGroceries</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a [routerLink]="['/login']" class="waves-effect waves-light btn-small light-green darken-4" *ngIf="!usuarioAutenticado">Entrar ou cadastre-se</a></li>
+            <div *ngIf="usuarioAutenticado" class="input-field col s12 combo-layout">
+                <select #t (change)="verificaAcao(t.selectedIndex)">
+                  <option disabled selected>Bem vindo(a) {{usuario.nome}}</option>
+                  <option [value]="minhaConta">Minha conta</option>
+                  <option [value]="sair">Sair</option>
+                </select>
+            </div>
+          </ul>
+        </div>
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a [routerLink]="['/menu']">Buscar</a></li>
+            <li class="tab"><a [routerLink]="['/meuCarrinho']" *ngIf="usuarioAutenticado">Meu carrinho<span class="new badge light-green darken-4" data-badge-caption="produto(s)">{{serviceHelper.retornaQuantidadeDeProdutosCarrinho(produtosCarrinhos)}}</span></a></li>
+            <li class="tab"><a class="active z-depth-5" [routerLink]="['/ofertas']">Ofertas</a></li>
+          </ul>
+        </div>
+</nav>
+
+<div class="col-md-12">
+    <blockquote class="ofertas-title">
+        Ofertas da Semana
+      </blockquote>
+      <div *ngIf="requisicaoSendoRealizada"class="loader preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+              <div class="circle"></div>
+              </div><div class="gap-patch">
+              <div class="circle"></div>
+              </div><div class="circle-clipper right">
+              <div class="circle"></div>
+              </div>
+          </div>
+      </div>
+    <painel #painel *ngFor="let produto of produtos" 
+    titulo="{{produto.nome | uppercase }}" productId="{{produto.id}}" imagemProduto="{{produto.foto}}" [ngClass]="{'col-md-6': menuLogin, 'col-md-3': !menuLogin}">
+    <produto valor="{{produto.valor}}" nome="{{produto.nome}}" quantidade="{{produto.quantidade}}" dataValidade="{{produto.validade | date: 'dd/MM/yyyy'}}"></produto> 
+    </painel>
+ </div>
+    

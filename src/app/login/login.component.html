@@ -1,0 +1,71 @@
+<div class="body-login">
+    <nav class="nav-extended green darken-4">
+        <div class="nav-wrapper">
+            <a [routerLink]="['/menu']" class="brand-logo"><i class="material-icons left logo">broken_image</i>iGroceries</a>
+         </div>
+    </nav>
+    
+    <div class="login-panel">
+        <div class="row form-login">
+            <div class="col s12 m10">
+                <nav class="nav-extended light-green darken-3">
+                    <div class="nav-wrapper">
+                        <h4 class="brand-logo login-label"> Login</h4>
+                    </div>
+                </nav>
+                <div class="card-panel green lighten-5">
+                    <form  class="row" >
+                        <div class="row">
+                            <div class="input-field col s6">
+                                    <input 
+                                    name="usuario" 
+                                    [(ngModel)]="autenticacao.email" 
+                                    class="form-control"  
+                                    autocomplete="off"
+                                    placeholder="E-mail cadastrado"
+                                    (click)="resetMessage()">     
+                            <label class="active" for="first_name2">E-mail</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                    <input 
+                                    name="senha" 
+                                    [(ngModel)]="autenticacao.senha" 
+                                    class="form-control"  
+                                    autocomplete="off"
+                                    placeholder="Senha"
+                                    (click)="resetMessage()"
+                                    type="password">        
+                            <label class="active" for="first_name2">Senha</label>
+                            </div>
+                            <div *ngIf="requisicaoSendoRealizada" class="col s6">
+                                <div class="preloader-wrapper big active">
+                                    <div class="spinner-layer spinner-green-only">
+                                        <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                        </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span *ngIf="erroAutenticacao" class="red-text text-darken-2">Usuário ou senha incorretos.</span>
+                </form>
+                <div class="row button-login">
+                    <a [routerLink]="['/cadastroUsuario']" class="btn light-green darken-3" name="action">Não tem cadastro? Cadastre-se
+                    </a>
+                    <button class="btn light-green darken-3" type="submit" name="action" (click)="realizarAutenticacao()">Entrar
+                    <i class="material-icons right">send</i>
+                    </button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    

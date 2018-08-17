@@ -1,0 +1,144 @@
+<nav class="nav-extended green darken-4">
+    <div class="nav-wrapper">
+        <a [routerLink]="['/menu']" class="brand-logo"><i class="material-icons left logo">broken_image</i>iGroceries</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a [routerLink]="['/login']" class="waves-effect waves-light btn-small light-green darken-3" *ngIf="!usuarioAutenticado">Entrar ou cadastre-se</a></li>
+            <div *ngIf="usuarioAutenticado" class="input-field col s12 combo-layout">
+                <select #t (change)="verificaAcao(t.selectedIndex)">
+                    <option disabled selected>Bem vindo(a) {{usuario.nome}}</option>
+                    <option [value]="minhaConta">Minha conta</option>
+                    <option [value]="sair">Sair</option>
+                </select>
+            </div>
+        </ul>
+    </div>
+    <div class="nav-content">
+        <ul class="tabs tabs-transparent">
+        <li class="tab"><a [routerLink]="['/']">Buscar</a></li>
+        <li class="tab"><a class="active z-depth-5" [routerLink]="['/meuCarrinho']">Meu carrinho<span class="new badge light-green darken-4" data-badge-caption="produto(s)">{{helperService.retornaQuantidadeDeProdutosCarrinho(produtos)}}</span></a></li>
+        <li class="tab"><a [routerLink]="['/ofertas']">Ofertas</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="row valign-wrapper">
+    <div class="col s12 m6" [ngClass]="{'compra-nao-finalizada': !compraFinalizada}">
+        <listaProdutosCarrinho></listaProdutosCarrinho>
+        <a *ngIf="!compraFinalizada" class="btn right bottom" (click)="finalizaCompra()">Fechar lista</a>
+    </div>
+
+    <form class="col s12 m6" *ngIf="compraFinalizada">
+    <h6>Endereço</h6>
+    <div class="row">
+            <div class="input-field col s12">
+            <input disabled [(ngModel)]="endereco.endereco" name="endereco" id="disabled" type="text" class="validate">
+            </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+        <input disabled [(ngModel)]="endereco.numero" name="numero" id="disabled" type="text" class="validate">
+        </div>
+        <div class="input-field col s6">
+             <input disabled [(ngModel)]="endereco.cep" name="cep" id="disabled" type="text" class="validate">
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+        <input disabled [(ngModel)]="endereco.complemento" name="complemento" id="disabled" type="text" class="validate">
+        </div>
+    </div>
+
+    <h6>Pagamento</h6>
+    <div *ngIf="!cartaoJaSelecionado" class="input-field col-md-12">
+        <select id="cartoes" [(ngModel)]="cartaoSelecionado" (ngModelChange)="verificaOpcaoCartao($event)" name="cartao">
+            <option *ngFor="let cart of cartoes" [ngValue]="cart">
+                <span>{{cart.bandeira}} | {{cart.numero}}</span>
+            </option>
+            <option [ngValue]="">
+                <span >Adicionar cartão</span>
+            </option>
+        </select>
+    </div>
+    <div *ngIf="cartaoJaSelecionado" class="col-md-12">
+        <div class="card horizontal">
+            <div class="card-stacked">
+            <div class="card-content">
+                <span>{{cartaoSelecionado.bandeira}} | {{cartaoSelecionado.numero}}</span> <a class="waves-effect waves-light btn right" (click)="mostrarGridCartoes()">Trocar</a>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal2" class="modal modal-cartao">
+        <div class="modal-content">
+            <h4>Cadastro do cartão</h4>
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="bandeiras" [(ngModel)]="cartao.bandeira" name="bandeira">
+                        <option *ngFor="let bandeira of bandeiras" [ngValue]="bandeira">{{bandeira}}</option>
+                    </select>
+                </div>
+                <div class="input-field col s5">
+                    <input [(ngModel)]="cartao.numero" id="numeroCartao" name="numeroCartao" type="text" class="validate">
+                    <label class="placeholder-normal" for="numeroCartao">Número do cartão</label>
+                </div>
+                <div class="row">
+                <div class="input-field col s3">
+                    <input [(ngModel)]="cartao.cvv" id="cvv" name="cvv" type="text" class="validate">
+                    <label class="placeholder-normal" for="cvv">CVV</label>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8">
+                    <input [(ngModel)]="cartao.nome" name="nomeTitular" type="text" class="validate">
+                    <label class="placeholder-normal" for="nomeTitular">Nome do titular</label>
+                </div>
+                <div class="input-field col s4">
+                    <input [(ngModel)]="dataValidade" id="dataValidade" name="validade" type="text" class="validate">
+                    <label class="placeholder-normal" for="validade">Data validade (MM/AA)</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a (click)="cadastrarCartao()" class="modal-close waves-effect waves-green btn-flat">Cadastrar</a>
+              </div>
+        </div>
+    </div>
+</form>
+      </div>
+    
+  <div id="modal1" class="modal modal-finalizado">
+    <div class="modal-content">
+        <div class="col s12 m7">
+            <h5 class="header">Compra concluída com sucesso!</h5>
+            <div class="card horizontal">
+              <div class="card-stacked light-green lighten-5">
+                <div class="card-content">
+                  <p>Sua compra foi concluída com sucesso!</p>
+                  <p>Em duas horas seus produtos serão entregues no endereço solicitado.</p>
+                  <p>Obrigado por comprar com a gente</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a [routerLink]="['/menu']" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+          </div>
+    </div>
+  </div>
+<button *ngIf="compraFinalizada" class="btn right" (click)="cadastraCompra()">Finalizar
+    <i class="material-icons right">send</i>
+</button>
+<button *ngIf="compraFinalizada" class="btn right" (click)="cancelarCompra()">Cancelar
+    <i class="material-icons right">clear</i>
+</button>
+<div *ngIf="requisicaoSendoRealizada" class="right loader preloader-wrapper small active">
+    <div class="spinner-layer spinner-green-only">
+        <div class="circle-clipper left">
+        <div class="circle"></div>
+        </div><div class="gap-patch">
+        <div class="circle"></div>
+        </div><div class="circle-clipper right">
+        <div class="circle"></div>
+        </div>
+    </div>
+</div>

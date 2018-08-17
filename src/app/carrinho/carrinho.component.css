@@ -1,0 +1,23 @@
+.compra-nao-finalizada{
+    margin-right: 25%;
+}
+
+.logo{
+    margin-left: 1em;
+}
+
+.combo-layout{
+    margin-left: -26%
+}
+
+.modal-finalizado{
+    max-height: 38%!important;
+}
+
+.modal-cartao{
+    max-height: 51%!important;
+}
+
+.placeholder-normal{
+    font-weight: 100!important;
+}

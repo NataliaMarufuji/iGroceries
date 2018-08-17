@@ -1,0 +1,165 @@
+<div class="body-cadastro">
+<nav class="nav-extended green darken-4">
+    <div class="nav-wrapper">
+       <a [routerLink]="['/menu']" class="brand-logo"><i class="material-icons left logo">broken_image</i>iGroceries</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div *ngIf="erro" class="card-panel red lighten-4 z-depth-5 scale-transition">{{mensagem}}</div>
+    <div class="container">
+            <div class="row">
+             <form class="col s12"  class="row" (submit)="cadastrar($event)" >
+               <h4>Dados Pessoais</h4>
+               <div class="row">
+                 <div class="input-field col s6">
+                        <input 
+                        name="nome" 
+                        [(ngModel)]="usuario.nome" 
+                        class="form-control"  
+                        autocomplete="off"
+                        id="nome"
+                        type="text"
+                        (click)="apagaMensagemDeErro()">
+                        <label class="placeholder-normal" for="nome">Primeiro Nome</label> 
+                 </div>
+                 <div class="input-field col s6">
+                        <input
+                        name="sobrenome" 
+                        [(ngModel)]="usuario.sobrenome" 
+                        class="form-control"  
+                        autocomplete="off"
+                        id="sobrenome"
+                        type="text"
+                        (click)="apagaMensagemDeErro()">
+                        <label class="placeholder-normal" for="sobrenome">Último Nome</label>
+                 </div>
+               </div>
+               <div class="row">
+                    <div class="input-field col s12">
+                           <input 
+                           name="cpf" 
+                           [(ngModel)]="usuario.cpf"  
+                           class="form-control" 
+                           autocomplete="off"
+                           id="cpf"
+                           type="text"
+                           (click)="apagaMensagemDeErro()">
+                           <label class="placeholder-normal" for="cpf">CPF</label>
+                    </div>
+                 </div>
+               <div class="row">
+                    <div class="input-field col s12">
+                           <input 
+                           name="email" 
+                           [(ngModel)]="usuario.email"  
+                           class="form-control" 
+                           autocomplete="off"
+                           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$"
+                           id="email"
+                           type="text"
+                           (click)="apagaMensagemDeErro()">
+                           <label class="placeholder-normal" for="email">E-mail</label>
+                    </div>
+                 </div>
+               <div class="row">
+                 <div class="input-field col s6">
+                        <input 
+                        name="senha" 
+                        [(ngModel)]="autenticacao.senha"  
+                        class="form-control" 
+                        autocomplete="off"
+                        id="senha"
+                        type="text"
+                        (click)="apagaMensagemDeErro()">
+                        <label class="placeholder-normal" for="senha">Senha</label>
+                 </div>
+                 <div class="input-field col s6">
+                        <input 
+                        name="confirmaSenha" 
+                        [(ngModel)]="autenticacao.confirmaSenha"  
+                        class="form-control" 
+                        autocomplete="off"
+                        id="confirmaSenha"
+                        type="text"
+                        (click)="apagaMensagemDeErro()">
+                        <label class="placeholder-normal" for="confirmaSenha">Confirmação da senha</label>
+                 </div>
+               </div>
+             </form>
+           </div>
+    
+           <div class="row">
+            <form class="col s12"  class="row" (submit)="cadastrar($event)">
+              <h4>Dados Endereço</h4>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input 
+                  name="endereco" 
+                  [(ngModel)]="endereco.endereco"  
+                  class="form-control" 
+                  autocomplete="off"
+                  id="endereco"
+                  type="text"
+                  (click)="apagaMensagemDeErro()">
+                  <label class="placeholder-normal" for="endereco">Endereço</label>
+                </div>
+                <div class="input-field col s6">
+                    <input 
+                    name="complemento" 
+                    [(ngModel)]="endereco.complemento"  
+                    class="form-control" 
+                    autocomplete="off"
+                    id="complemento"
+                    type="text"
+                    (click)="apagaMensagemDeErro()">
+                  <label class="placeholder-normal" for="complemento">Complemento</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                    <input 
+                    name="numero" 
+                    [(ngModel)]="endereco.numero"  
+                    class="form-control" 
+                    autocomplete="off"
+                    id="numero"
+                    type="text"
+                    (click)="apagaMensagemDeErro()">
+                  <label class="placeholder-normal" for="numero">Número</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                    <input 
+                    name="cep" 
+                    [(ngModel)]="endereco.cep"  
+                    class="form-control" 
+                    autocomplete="off"
+                    id="cep"
+                    type="text"
+                    (click)="apagaMensagemDeErro()">
+                  <label class="placeholder-normal" for="cep">CEP</label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <button class="btn waves-effect waves-light button-login right" (click)="cadastraUsuario()" type="submit" name="action">Cadastrar
+                <i class="material-icons right">send</i>
+            </button>
+            <div *ngIf="requisicaoSendoRealizada" class="right loader preloader-wrapper small active">
+                <div class="spinner-layer spinner-green-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
