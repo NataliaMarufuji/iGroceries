@@ -17,7 +17,6 @@ require("rxjs/add/operator/map");
 var painel_module_1 = require("./painel/painel.module");
 var cadastroUsuario_component_1 = require("./cadastroUsuario/cadastroUsuario.component");
 var listagemMenu_component_1 = require("./listagemMenu/listagemMenu.component");
-var listagemLista_component_1 = require("./listagemLista/listagemLista.component");
 var listagemUsuario_component_1 = require("./listagemUsuario/listagemUsuario.component");
 var endereco_module_1 = require("./endereco/endereco.module");
 var menu_component_1 = require("./menu/menu.component");
@@ -26,18 +25,15 @@ var autenticacao_module_1 = require("./autenticacao/autenticacao.module");
 var contaUsuario_component_1 = require("./contaUsuario/contaUsuario.component");
 var app_routes_1 = require("./app.routes");
 var forms_1 = require("@angular/forms");
-var lista_module_1 = require("./lista/lista.module");
 var listaProdutosCarrinho_module_1 = require("./listaProdutosCarrinho/listaProdutosCarrinho.module");
 var ofertas_module_1 = require("./ofertas/ofertas.module");
 var helper_module_1 = require("./helper/helper.module");
 var listaProdutosCarrinho_component_1 = require("./listaProdutosCarrinho/listaProdutosCarrinho.component");
-var painelListas_module_1 = require("./painelListas/painelListas.module");
 var cartao_module_1 = require("./cartao/cartao.module");
 var compra_module_1 = require("./compra/compra.module");
 var services_module_1 = require("./services/services.module");
 var ofertas_component_1 = require("./ofertas/ofertas.component");
 var carrinho_component_1 = require("./carrinho/carrinho.component");
-var remocaoConta_component_1 = require("./remocaoConta/remocaoConta.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -48,12 +44,10 @@ var AppModule = /** @class */ (function () {
                 produto_module_1.ProdutoModule,
                 http_1.HttpModule,
                 painel_module_1.PainelModule,
-                painelListas_module_1.PainelListasModule,
                 app_routes_1.routing,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
                 listaProdutosCarrinho_module_1.ListaProdutosCarrinhoModule,
-                lista_module_1.ListaModule,
                 usuario_module_1.UsuarioModule,
                 endereco_module_1.EnderecoModule,
                 compra_module_1.CompraModule,
@@ -64,7 +58,7 @@ var AppModule = /** @class */ (function () {
                 services_module_1.ServicesModule,
                 ofertas_module_1.OfertasModule
             ],
-            declarations: [app_component_1.AppComponent, cadastroUsuario_component_1.CadastroUsuarioComponent, listagemUsuario_component_1.ListagemUsuarioComponent, menu_component_1.MenuComponent, contaUsuario_component_1.ContaUsuarioComponent, listagemMenu_component_1.ListagemMenuComponent, listagemLista_component_1.ListagemListasComponent, login_component_1.LoginComponent, remocaoConta_component_1.RemocaoContaComponent, ofertas_component_1.OfertasComponent, carrinho_component_1.CarrinhoComponent, listaProdutosCarrinho_component_1.ListaProdutosCarrinhoComponent],
+            declarations: [app_component_1.AppComponent, cadastroUsuario_component_1.CadastroUsuarioComponent, listagemUsuario_component_1.ListagemUsuarioComponent, menu_component_1.MenuComponent, contaUsuario_component_1.ContaUsuarioComponent, listagemMenu_component_1.ListagemMenuComponent, login_component_1.LoginComponent, ofertas_component_1.OfertasComponent, carrinho_component_1.CarrinhoComponent, listaProdutosCarrinho_component_1.ListaProdutosCarrinhoComponent],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

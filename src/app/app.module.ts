@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 import { PainelModule } from './painel/painel.module';
 import { CadastroUsuarioComponent } from './cadastroUsuario/cadastroUsuario.component';
 import { ListagemMenuComponent } from './listagemMenu/listagemMenu.component';
-import { ListagemListasComponent } from './listagemLista/listagemLista.component';
 import { ListagemUsuarioComponent } from './listagemUsuario/listagemUsuario.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { EnderecoComponent } from './endereco/endereco.component';
@@ -20,18 +19,15 @@ import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { ContaUsuarioComponent } from './contaUsuario/contaUsuario.component';
 import { routing }  from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ListaModule } from './lista/lista.module';
 import { ListaProdutosCarrinhoModule } from './listaProdutosCarrinho/listaProdutosCarrinho.module';
 import { OfertasModule } from './ofertas/ofertas.module';
 import { HelperModule } from './helper/helper.module';
 import { ListaProdutosCarrinhoComponent } from './listaProdutosCarrinho/listaProdutosCarrinho.component';
-import { PainelListasModule } from './painelListas/painelListas.module';
 import { CartaoModule } from './cartao/cartao.module';
 import { CompraModule } from './compra/compra.module';
 import { ServicesModule } from './services/services.module';
 import { OfertasComponent } from './ofertas/ofertas.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
-import { RemocaoContaComponent } from './remocaoConta/remocaoConta.component';
 
 @NgModule({
     imports: [ 
@@ -39,12 +35,10 @@ import { RemocaoContaComponent } from './remocaoConta/remocaoConta.component';
         ProdutoModule, 
         HttpModule, 
         PainelModule,
-        PainelListasModule, 
         routing, 
         FormsModule, 
         ReactiveFormsModule,
         ListaProdutosCarrinhoModule,
-        ListaModule,
         UsuarioModule,
         EnderecoModule,
         CompraModule,
@@ -55,7 +49,7 @@ import { RemocaoContaComponent } from './remocaoConta/remocaoConta.component';
         ServicesModule,
         OfertasModule
     ],
-    declarations: [ AppComponent,CadastroUsuarioComponent, ListagemUsuarioComponent, MenuComponent, ContaUsuarioComponent, ListagemMenuComponent, ListagemListasComponent, LoginComponent, RemocaoContaComponent, OfertasComponent, CarrinhoComponent, ListaProdutosCarrinhoComponent ],
+    declarations: [ AppComponent,CadastroUsuarioComponent, ListagemUsuarioComponent, MenuComponent, ContaUsuarioComponent, ListagemMenuComponent, LoginComponent, OfertasComponent, CarrinhoComponent, ListaProdutosCarrinhoComponent ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }
