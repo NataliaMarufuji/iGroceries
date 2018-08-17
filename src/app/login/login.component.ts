@@ -28,25 +28,24 @@ export class LoginComponent {
 
     user: UsuarioComponent = new UsuarioComponent();
     autenticacao: AutenticacaoComponent = new AutenticacaoComponent();
-    service: UsuarioService;
-    service2: ServicesService;
+    usuarioService: UsuarioService;
+    services: ServicesService;
     listaAutenticacao: AutenticacaoComponent[];
     route: ActivatedRoute;
     router: Router;
     erroAutenticacao:boolean;
     requisicaoSendoRealizada: boolean;
-    mensagem: string = "";
 
 
-    constructor(service: UsuarioService, route: ActivatedRoute, router: Router, service2: ServicesService ){
+    constructor(services: ServicesService, service: UsuarioService, route: ActivatedRoute, router: Router, service2: ServicesService ){
         this.route = route;
         this.router = router;
         this.erroAutenticacao = false;
         this.requisicaoSendoRealizada = false;
         
-        this.service = service;
-        this.service2 = service2;
-        this.service2.buscaObjeto("autenticacao")
+        this.usuarioService = service;
+        this.services = services;
+        this.services.buscaObjeto("autenticacao")
                         .subscribe(lista => this.listaAutenticacao = lista);
 
         Logger.info('Menu carregado');
@@ -57,18 +56,18 @@ export class LoginComponent {
         var contador = 1;
         this.requisicaoSendoRealizada = true;
         this.listaAutenticacao.forEach(atual => {
-            this.service.buscaPorId(atual.usuario.toString())
+            this.services.buscaObjetoPorID("usuario", atual.usuario.toString())
                         .subscribe(usuario => {
                             if(usuario.email == this.autenticacao.email
                                 && atual.senha == this.autenticacao.senha){
-                                    this.service.setAutenticado(true);
-                                    this.service.setUser(usuario);
+                                    this.usuarioService.setAutenticado(true);
+                                    this.usuarioService.setUser(usuario);
                                     this.erroAutenticacao = false;
                                     this.requisicaoSendoRealizada = false;
                                     this.router.navigateByUrl('/menu');
                             }else{
-                                if(contador == this.listaAutenticacao.length && !this.service.getAutenticado()){
-                                    this.service.setAutenticado(false);
+                                if(contador == this.listaAutenticacao.length && !this.usuarioService.getAutenticado()){
+                                    this.usuarioService.setAutenticado(false);
                                     this.erroAutenticacao = true;
                                     this.requisicaoSendoRealizada = false;
                                 }

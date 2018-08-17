@@ -26,18 +26,17 @@ var usuario_service_1 = require("../usuario/usuario.service");
 var services_service_1 = require("../services/services.service");
 var logger_1 = require("../logger");
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(service, route, router, service2) {
+    function LoginComponent(services, service, route, router, service2) {
         var _this = this;
         this.user = new usuario_component_1.UsuarioComponent();
         this.autenticacao = new autenticacao_component_1.AutenticacaoComponent();
-        this.mensagem = "";
         this.route = route;
         this.router = router;
         this.erroAutenticacao = false;
         this.requisicaoSendoRealizada = false;
-        this.service = service;
-        this.service2 = service2;
-        this.service2.buscaObjeto("autenticacao")
+        this.usuarioService = service;
+        this.services = services;
+        this.services.buscaObjeto("autenticacao")
             .subscribe(function (lista) { return _this.listaAutenticacao = lista; });
         logger_1.Logger.info('Menu carregado');
     }
@@ -47,19 +46,19 @@ var LoginComponent = /** @class */ (function () {
         var contador = 1;
         this.requisicaoSendoRealizada = true;
         this.listaAutenticacao.forEach(function (atual) {
-            _this.service.buscaPorId(atual.usuario.toString())
+            _this.services.buscaObjetoPorID("usuario", atual.usuario.toString())
                 .subscribe(function (usuario) {
                 if (usuario.email == _this.autenticacao.email
                     && atual.senha == _this.autenticacao.senha) {
-                    _this.service.setAutenticado(true);
-                    _this.service.setUser(usuario);
+                    _this.usuarioService.setAutenticado(true);
+                    _this.usuarioService.setUser(usuario);
                     _this.erroAutenticacao = false;
                     _this.requisicaoSendoRealizada = false;
                     _this.router.navigateByUrl('/menu');
                 }
                 else {
-                    if (contador == _this.listaAutenticacao.length && !_this.service.getAutenticado()) {
-                        _this.service.setAutenticado(false);
+                    if (contador == _this.listaAutenticacao.length && !_this.usuarioService.getAutenticado()) {
+                        _this.usuarioService.setAutenticado(false);
                         _this.erroAutenticacao = true;
                         _this.requisicaoSendoRealizada = false;
                     }
@@ -83,7 +82,7 @@ var LoginComponent = /** @class */ (function () {
             templateUrl: './login.component.html',
             styleUrls: ['./login.component.css']
         }),
-        __metadata("design:paramtypes", [usuario_service_1.UsuarioService, router_1.ActivatedRoute, router_1.Router, services_service_1.ServicesService])
+        __metadata("design:paramtypes", [services_service_1.ServicesService, usuario_service_1.UsuarioService, router_1.ActivatedRoute, router_1.Router, services_service_1.ServicesService])
     ], LoginComponent);
     return LoginComponent;
 }());

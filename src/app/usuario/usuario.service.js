@@ -13,27 +13,7 @@ var http_1 = require("@angular/http");
 var core_1 = require("@angular/core");
 var UsuarioService = /** @class */ (function () {
     function UsuarioService(http) {
-        this.url = 'v1/fotos';
-        this.projectsKey = 'projects_key';
-        this.http = http;
-        this.headers = new http_1.Headers();
-        this.headers.append('Content-Type', 'application/json');
-        var projects = localStorage.getItem(this.projectsKey);
-        if (projects) {
-            this._user = JSON.parse(projects);
-        }
-        this.options = new http_1.RequestOptions({
-            headers: new http_1.Headers({
-                "content-type": "application/json",
-                "x-apikey": "5b30d8500c346a20d90a5e31",
-                "cache-control": "no-cache"
-            })
-        });
     }
-    UsuarioService.prototype.setProjects = function (projects) {
-        localStorage.setItem(this.projectsKey, JSON.stringify(projects));
-        this._user = projects;
-    };
     Object.defineProperty(UsuarioService.prototype, "projects", {
         get: function () {
             return this._user;
@@ -58,11 +38,6 @@ var UsuarioService = /** @class */ (function () {
     };
     UsuarioService.prototype.getAutenticado = function () {
         return this._autenticado;
-    };
-    UsuarioService.prototype.buscaPorId = function (id) {
-        return this.http
-            .get("https://igroceries-20e9.restdb.io/rest/usuario/" + id, this.options)
-            .map(function (res) { return res.json(); });
     };
     UsuarioService = __decorate([
         core_1.Injectable(),
