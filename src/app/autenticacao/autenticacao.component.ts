@@ -9,12 +9,8 @@
 
 import { Component, Input } from '@angular/core';
 import { UsuarioComponent } from '../usuario/usuario.component';
-import { ListagemMenuComponent } from '../listagemMenu/listagemMenu.component';
 import { FormGroup, FormBuilder, Validators, FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';;
-import { UsuarioService } from '../usuario/usuario.service';
-import { ListagemMenuService } from '../listagemMenu/listagemMenu.service';
-import { AutenticacaoService } from './autenticacao.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Logger } from "../logger";
 
 @Component({

@@ -22,31 +22,29 @@ var produto_service_1 = require("../produto/produto.service");
 var services_service_1 = require("../services/services.service");
 var usuario_service_1 = require("../usuario/usuario.service");
 var helper_service_1 = require("../helper/helper.service");
-var listagemMenu_service_1 = require("../listagemMenu/listagemMenu.service");
 var router_1 = require("@angular/router");
 var listaProdutosCarrinho_service_1 = require("../listaProdutosCarrinho/listaProdutosCarrinho.service");
 ;
 var OfertasComponent = /** @class */ (function () {
-    function OfertasComponent(service, service2, service3, service5, router, serviceHelper, service4) {
+    function OfertasComponent(service, service3, service5, router, serviceHelper, service4) {
         var _this = this;
         this.produtos = [];
         this.produtosCarrinhos = [];
         this.router = router;
-        this.service = service;
-        this.service2 = service2;
-        this.service3 = service3;
-        this.service4 = service4;
-        this.service5 = service5;
+        this.produtoService = service;
+        this.usuarioService = service3;
+        this.services = service4;
+        this.listaProdutosCarrinhoService = service5;
         this.serviceHelper = serviceHelper;
-        this.usuarioAutenticado = this.service3.getAutenticado();
-        this.usuario = this.service3.getUser();
+        this.usuarioAutenticado = this.usuarioService.getAutenticado();
+        this.usuario = this.usuarioService.getUser();
         this.requisicaoSendoRealizada = false;
         this.serviceHelper.retornaScriptModal();
-        this.produtosCarrinhos = this.service5.getProductList();
-        this.produtos = this.service.getProductSaleList();
+        this.produtosCarrinhos = this.listaProdutosCarrinhoService.getProductList();
+        this.produtos = this.produtoService.getProductSaleList();
         if (this.produtos.length == 0) {
             this.requisicaoSendoRealizada = true;
-            this.service4.buscaObjeto("produto")
+            this.services.buscaObjeto("produto")
                 .subscribe(function (lista) {
                 lista.forEach(function (atual) {
                     if (atual.oferta) {
@@ -56,11 +54,10 @@ var OfertasComponent = /** @class */ (function () {
                         _this.produtos.push(atual);
                     }
                 });
-                _this.service.setProductSaleList(_this.produtos);
+                _this.produtoService.setProductSaleList(_this.produtos);
                 _this.requisicaoSendoRealizada = false;
             });
         }
-        this.menuLogin = this.service2.getClass();
     }
     OfertasComponent.prototype.verificaAcao = function (acao) {
         if (acao == 1) {
@@ -71,7 +68,7 @@ var OfertasComponent = /** @class */ (function () {
         }
     };
     OfertasComponent.prototype.logoutClicked = function () {
-        this.service3.setAutenticado(false);
+        this.usuarioService.setAutenticado(false);
         this.router.navigateByUrl("/menu");
     };
     OfertasComponent = __decorate([
@@ -81,7 +78,7 @@ var OfertasComponent = /** @class */ (function () {
             templateUrl: './ofertas.component.html',
             styleUrls: ['./ofertas.component.css']
         }),
-        __metadata("design:paramtypes", [produto_service_1.ProdutoService, listagemMenu_service_1.ListagemMenuService, usuario_service_1.UsuarioService, listaProdutosCarrinho_service_1.ListaProdutosCarrinhoService, router_1.Router, helper_service_1.HelperService, services_service_1.ServicesService])
+        __metadata("design:paramtypes", [produto_service_1.ProdutoService, usuario_service_1.UsuarioService, listaProdutosCarrinho_service_1.ListaProdutosCarrinhoService, router_1.Router, helper_service_1.HelperService, services_service_1.ServicesService])
     ], OfertasComponent);
     return OfertasComponent;
 }());

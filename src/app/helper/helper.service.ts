@@ -73,6 +73,12 @@ export class HelperService {
          });
     }
 
+    retornaScriptDeModal(modalId){
+        return $.getScript('app/helper/modal.min.js', function() {
+            inicializaModal(modalId);
+         });
+    }
+
     retornaScriptMascaras(){
         return $.getScript('app/helper/mascaras.min.js');
     }

@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { CadastroUsuarioComponent } from './cadastroUsuario/cadastroUsuario.component';
-import { ListagemUsuarioComponent } from './listagemUsuario/listagemUsuario.component';
 import { MenuComponent } from './menu/menu.component';
 import { AutenticacaoComponent } from './autenticacao/autenticacao.component';
 import { LoginComponent } from './login/login.component';

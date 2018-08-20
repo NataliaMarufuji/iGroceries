@@ -35,12 +35,10 @@ var CadastroUsuarioComponent = /** @class */ (function () {
         this.endereco = new endereco_component_1.EnderecoComponent();
         this.autenticacao = new autenticacao_component_1.AutenticacaoComponent();
         this.mensagem = '';
-        this.isEdicao = false;
         this.erro = false;
-        this.produtos = [];
-        this.service = service;
-        this.service2 = service2;
-        this.service4 = service4;
+        this.usuarioService = service;
+        this.services = service2;
+        this.autenticacaoService = service4;
         this.helperService = helperService;
         this.route = route;
         this.router = router;
@@ -55,18 +53,18 @@ var CadastroUsuarioComponent = /** @class */ (function () {
         objetoParaService.objeto = this.endereco;
         if (this.validaCamposUsuario()) {
             this.requisicaoSendoRealizada = true;
-            this.service2.cadastra(objetoParaService).subscribe(function (params) {
+            this.services.cadastra(objetoParaService).subscribe(function (params) {
                 _this.usuario.endereco = params._id;
                 objetoParaService.url = "usuario";
                 objetoParaService.objeto = _this.usuario;
-                _this.service2.cadastra(objetoParaService).subscribe(function (params) {
+                _this.services.cadastra(objetoParaService).subscribe(function (params) {
                     _this.autenticacao.usuario = params._id;
                     objetoParaService.url = "autenticacao";
                     objetoParaService.objeto = _this.autenticacao;
-                    _this.service2.cadastra(objetoParaService).subscribe(function (params) {
+                    _this.services.cadastra(objetoParaService).subscribe(function (params) {
                         _this.requisicaoSendoRealizada = false;
-                        _this.service.setAutenticado(true);
-                        _this.service.setUser(_this.usuario);
+                        _this.usuarioService.setAutenticado(true);
+                        _this.usuarioService.setUser(_this.usuario);
                         _this.router.navigateByUrl("/menu");
                     });
                 });
@@ -99,7 +97,7 @@ var CadastroUsuarioComponent = /** @class */ (function () {
             this.mensagem = 'A senha não pode estar em branco';
             return;
         }
-        if (!this.service4.verificaSenhasIguais(this.autenticacao.senha, this.autenticacao.confirmaSenha)) {
+        if (!this.autenticacaoService.verificaSenhasIguais(this.autenticacao.senha, this.autenticacao.confirmaSenha)) {
             this.erro = true;
             this.mensagem = 'As senhas devem ser iguais';
             return;

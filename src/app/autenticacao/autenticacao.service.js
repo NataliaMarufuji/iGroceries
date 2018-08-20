@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var AutenticacaoService = /** @class */ (function () {
     function AutenticacaoService() {
-        this.projectsKey = 'projects_key';
     }
     AutenticacaoService.prototype.setAutenticado = function (autenticado) {
         this._autenticado = autenticado;

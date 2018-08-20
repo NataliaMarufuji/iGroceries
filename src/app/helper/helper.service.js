@@ -71,6 +71,11 @@ var HelperService = /** @class */ (function () {
             mostraToast(frase);
         });
     };
+    HelperService.prototype.retornaScriptDeModal = function (modalId) {
+        return $.getScript('app/helper/modal.min.js', function () {
+            inicializaModal(modalId);
+        });
+    };
     HelperService.prototype.retornaScriptMascaras = function () {
         return $.getScript('app/helper/mascaras.min.js');
     };

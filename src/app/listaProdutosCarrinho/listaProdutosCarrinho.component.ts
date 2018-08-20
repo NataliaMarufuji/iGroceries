@@ -14,7 +14,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../usuario/usuario.service';
 import { ProdutoComponent } from '../produto/produto.component';
 import { ProdutoService } from '../produto/produto.service';
-import { ListagemUsuarioComponent } from '../listagemUsuario/listagemUsuario.component';
 import { ListaProdutosCarrinhoService } from '../listaProdutosCarrinho/listaProdutosCarrinho.service';
 import { CompraService } from '../compra/compra.service';
 

@@ -16,15 +16,11 @@ import { ListaProdutosCarrinhoService } from '../listaProdutosCarrinho/listaProd
 import { EnderecoComponent } from '../endereco/endereco.component';
 import { ServicesComponent } from '../services/services.component';
 import { ProdutoComponent } from '../produto/produto.component';
-import { ProdutoService } from '../produto/produto.service';
-import { ListagemUsuarioComponent } from '../listagemUsuario/listagemUsuario.component';
-import { AutenticacaoService } from '../autenticacao/autenticacao.service';
 import { CartaoComponent } from '../cartao/cartao.component';
 import { CompraService } from '../compra/compra.service';
 import { ServicesService } from '../services/services.service';
 import { CompraComponent } from '../compra/compra.component';
 import { HelperService } from '../helper/helper.service';
-import { isUndefined } from 'util';
 
 @Component({
     moduleId: module.id,
@@ -51,10 +47,8 @@ export class CarrinhoComponent {
     compraFinalizada: Boolean;
     usuarioAutenticado: boolean;
     bandeiras: string[] = [];
-    dataValidade: string;
     requisicaoSendoRealizada: boolean;
     cartaoJaSelecionado: boolean;
-    requisicaoConcluida: boolean;
     totalCarrinho: number;
     objetoParaService = new ServicesComponent();
 
@@ -73,7 +67,6 @@ export class CarrinhoComponent {
 
         this.compraFinalizada = false;   
         this.requisicaoSendoRealizada = false;
-        this.requisicaoConcluida = false;
         this.cartaoJaSelecionado = false;
         this.iniciaBandeiras();
         this.usuarioAutenticado = this.usuarioService.getAutenticado(); 
@@ -105,7 +98,7 @@ export class CarrinhoComponent {
         this.objetoParaService.url = "cartao";
         this.objetoParaService.objeto = this.cartao;
 
-        var validade = "01/".concat(this.dataValidade);
+        var validade = "01/".concat(this.cartao.validade.toString());
         this.cartao.validade = new Date(validade);
         this.services.cadastra(this.objetoParaService)
                      .subscribe(resp => {
@@ -135,10 +128,9 @@ export class CarrinhoComponent {
         this.services.cadastra(this.objetoParaService)
                         .subscribe(resp => {
                         this.requisicaoSendoRealizada = false;
-                        this.requisicaoConcluida = true;
                         var products = [];
                         this.listaProdutosCarrinhoService.setProductList(products);
-                        $.getScript('app/carrinho/carrinho.min.js');
+                        this.helperService.retornaScriptDeModal("modal1");
                         });
     }
 
@@ -153,7 +145,7 @@ export class CarrinhoComponent {
         this.cartaoSelecionado = event;
         if(event == "Adicionar cartão"){
             this.cartao = new CartaoComponent();
-            $.getScript('app/carrinho/carrinho2.min.js');
+            this.helperService.retornaScriptDeModal("modal2");
         }else{
             this.cartao = this.cartaoSelecionado;
             this.cartaoJaSelecionado = true;

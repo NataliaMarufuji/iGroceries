@@ -50,7 +50,6 @@ var CarrinhoComponent = /** @class */ (function () {
         this.helperService.retornaScriptMascaras();
         this.compraFinalizada = false;
         this.requisicaoSendoRealizada = false;
-        this.requisicaoConcluida = false;
         this.cartaoJaSelecionado = false;
         this.iniciaBandeiras();
         this.usuarioAutenticado = this.usuarioService.getAutenticado();
@@ -79,7 +78,7 @@ var CarrinhoComponent = /** @class */ (function () {
         var _this = this;
         this.objetoParaService.url = "cartao";
         this.objetoParaService.objeto = this.cartao;
-        var validade = "01/".concat(this.dataValidade);
+        var validade = "01/".concat(this.cartao.validade.toString());
         this.cartao.validade = new Date(validade);
         this.services.cadastra(this.objetoParaService)
             .subscribe(function (resp) {
@@ -110,10 +109,9 @@ var CarrinhoComponent = /** @class */ (function () {
         this.services.cadastra(this.objetoParaService)
             .subscribe(function (resp) {
             _this.requisicaoSendoRealizada = false;
-            _this.requisicaoConcluida = true;
             var products = [];
             _this.listaProdutosCarrinhoService.setProductList(products);
-            $.getScript('app/carrinho/carrinho.min.js');
+            _this.helperService.retornaScriptDeModal("modal1");
         });
     };
     CarrinhoComponent.prototype.iniciaBandeiras = function () {
@@ -126,7 +124,7 @@ var CarrinhoComponent = /** @class */ (function () {
         this.cartaoSelecionado = event;
         if (event == "Adicionar cartão") {
             this.cartao = new cartao_component_1.CartaoComponent();
-            $.getScript('app/carrinho/carrinho2.min.js');
+            this.helperService.retornaScriptDeModal("modal2");
         }
         else {
             this.cartao = this.cartaoSelecionado;

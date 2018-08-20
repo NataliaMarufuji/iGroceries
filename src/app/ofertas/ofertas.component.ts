@@ -12,12 +12,9 @@ import { Http } from '@angular/http';
 import { UsuarioComponent } from '../usuario/usuario.component';
 import { ProdutoComponent } from '../produto/produto.component';
 import { ProdutoService } from '../produto/produto.service';
-import { ServicesComponent } from '../services/services.component';
 import { ServicesService } from '../services/services.service';
 import { UsuarioService } from '../usuario/usuario.service';
-import { AutenticacaoService } from '../autenticacao/autenticacao.service';
 import { HelperService } from '../helper/helper.service';
-import { ListagemMenuService } from '../listagemMenu/listagemMenu.service';
 import { PainelComponent } from '../painel/painel.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaProdutosCarrinhoService } from '../listaProdutosCarrinho/listaProdutosCarrinho.service';
@@ -34,37 +31,35 @@ export class OfertasComponent {
     produtos: ProdutoComponent[] = [];
     produtosCarrinhos: ProdutoComponent[] = [];
     usuario: UsuarioComponent;
-    service: ProdutoService;
-    service2: ListagemMenuService;
-    service3: UsuarioService;
-    service4: ServicesService;
-    service5: ListaProdutosCarrinhoService
+    produtoService: ProdutoService;
+    usuarioService: UsuarioService;
+    services: ServicesService;
+    listaProdutosCarrinhoService: ListaProdutosCarrinhoService
     serviceHelper: HelperService;
     menuLogin: boolean;
     usuarioAutenticado: boolean;
     requisicaoSendoRealizada: boolean;
     router: Router;
 
-    constructor(service: ProdutoService, service2: ListagemMenuService, service3: UsuarioService,service5: ListaProdutosCarrinhoService, router: Router, serviceHelper: HelperService, service4: ServicesService ) {
+    constructor(service: ProdutoService, service3: UsuarioService,service5: ListaProdutosCarrinhoService, router: Router, serviceHelper: HelperService, service4: ServicesService ) {
         this.router = router;
-        this.service = service;
-        this.service2 = service2;
-        this.service3 = service3;
-        this.service4 = service4;
-        this.service5 = service5;
+        this.produtoService = service;
+        this.usuarioService = service3;
+        this.services = service4;
+        this.listaProdutosCarrinhoService = service5;
         this.serviceHelper = serviceHelper;
 
         
-        this.usuarioAutenticado = this.service3.getAutenticado();
-        this.usuario = this.service3.getUser();
+        this.usuarioAutenticado = this.usuarioService.getAutenticado();
+        this.usuario = this.usuarioService.getUser();
         this.requisicaoSendoRealizada = false;
         this.serviceHelper.retornaScriptModal();
-        this.produtosCarrinhos = this.service5.getProductList();
+        this.produtosCarrinhos = this.listaProdutosCarrinhoService.getProductList();
 
-        this.produtos = this.service.getProductSaleList();
+        this.produtos = this.produtoService.getProductSaleList();
         if(this.produtos.length == 0){
             this.requisicaoSendoRealizada = true;
-            this.service4.buscaObjeto("produto")
+            this.services.buscaObjeto("produto")
             .subscribe(lista => {
                 lista.forEach(atual => {
                     if(atual.oferta){
@@ -74,12 +69,10 @@ export class OfertasComponent {
                         this.produtos.push(atual);
                     }
                 })
-                this.service.setProductSaleList(this.produtos);
+                this.produtoService.setProductSaleList(this.produtos);
                 this.requisicaoSendoRealizada = false;
             });
         }
-
-        this.menuLogin = this.service2.getClass();
 
     }
 
@@ -92,7 +85,7 @@ export class OfertasComponent {
     }
 
     logoutClicked(){
-        this.service3.setAutenticado(false);
+        this.usuarioService.setAutenticado(false);
         this.router.navigateByUrl("/menu");
       }
 }

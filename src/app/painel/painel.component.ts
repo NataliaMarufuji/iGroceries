@@ -16,9 +16,9 @@ import { HelperService } from '../helper/helper.service';
 })
 export class PainelComponent { 
 
-    service: ProdutoService;
-    service2: UsuarioService;
-    service3: ListaProdutosCarrinhoService;
+    produtoService: ProdutoService;
+    usuarioService: UsuarioService;
+    listaProdutosCarrinhoService: ListaProdutosCarrinhoService;
     serviceHelper: HelperService;
     productList: ProdutoComponent[];
     usuarioAutenticado: boolean;
@@ -37,14 +37,14 @@ export class PainelComponent {
         this.serviceHelper.retornaScriptModal();
 
         this.router = router;
-        this.service = service;
+        this.produtoService = service;
 
-        this.productList = this.service.getProductList();
+        this.productList = this.produtoService.getProductList();
 
-        this.service2 = service2;
-        this.usuarioAutenticado = this.service2.getAutenticado();
+        this.usuarioService = service2;
+        this.usuarioAutenticado = this.usuarioService.getAutenticado();
 
-        this.service3 = service3;
+        this.listaProdutosCarrinhoService = service3;
         this.inicializaCombo();
     }
 
@@ -58,9 +58,9 @@ export class PainelComponent {
             this.serviceHelper.retornaScriptToast('Selecione a quantidade do produto');
             return
         }else{
-            var produto = this.service.buscaPorId(this.productList, this.productId);
+            var produto = this.produtoService.buscaPorId(this.productList, this.productId);
             var quantidadeAux = produto.quantidade;
-            var listaDeProdutos = this.service3.getProductList();
+            var listaDeProdutos = this.listaProdutosCarrinhoService.getProductList();
     
             produto.quantidade = parseInt(quantidade);
             produto.valorTotal = produto.valor * produto.quantidade;
@@ -72,7 +72,7 @@ export class PainelComponent {
                 this.serviceHelper.retornaScriptToast('Item adicionado ao carrinho');
             }else{
                 listaDeProdutos.push(produto);
-                this.service3.setProductList(listaDeProdutos);
+                this.listaProdutosCarrinhoService.setProductList(listaDeProdutos);
     
                 if(!this.usuarioAutenticado){
                     this.router.navigateByUrl("/login");

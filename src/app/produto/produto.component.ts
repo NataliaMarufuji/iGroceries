@@ -21,9 +21,7 @@ export class ProdutoComponent {
     @Input() valor: number;
     @Input() quantidade: number;
     @Input() dataValidade: Date;
-    unidadeMedida: string;
     valorTotal: number;
-    usuario_id: string;
     descricao: string;
     id: string;
 }

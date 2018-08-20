@@ -7,7 +7,6 @@ import { Injectable } from '@angular/core';
 export class EnderecoService { 
 
     private _adress: EnderecoComponent;
-    private readonly projectsKey: string = 'projects_key';
     private _autenticado: boolean;
 
     constructor() {}

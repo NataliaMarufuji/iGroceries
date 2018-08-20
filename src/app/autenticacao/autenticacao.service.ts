@@ -7,7 +7,6 @@ import { Location } from '@angular/common';
 @Injectable()
 export class AutenticacaoService { 
 
-    private readonly projectsKey: string = 'projects_key';
     private _autenticado: boolean;
 
     constructor() {}

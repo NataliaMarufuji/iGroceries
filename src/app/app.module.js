@@ -17,7 +17,6 @@ require("rxjs/add/operator/map");
 var painel_module_1 = require("./painel/painel.module");
 var cadastroUsuario_component_1 = require("./cadastroUsuario/cadastroUsuario.component");
 var listagemMenu_component_1 = require("./listagemMenu/listagemMenu.component");
-var listagemUsuario_component_1 = require("./listagemUsuario/listagemUsuario.component");
 var endereco_module_1 = require("./endereco/endereco.module");
 var menu_component_1 = require("./menu/menu.component");
 var login_component_1 = require("./login/login.component");
@@ -58,7 +57,7 @@ var AppModule = /** @class */ (function () {
                 services_module_1.ServicesModule,
                 ofertas_module_1.OfertasModule
             ],
-            declarations: [app_component_1.AppComponent, cadastroUsuario_component_1.CadastroUsuarioComponent, listagemUsuario_component_1.ListagemUsuarioComponent, menu_component_1.MenuComponent, contaUsuario_component_1.ContaUsuarioComponent, listagemMenu_component_1.ListagemMenuComponent, login_component_1.LoginComponent, ofertas_component_1.OfertasComponent, carrinho_component_1.CarrinhoComponent, listaProdutosCarrinho_component_1.ListaProdutosCarrinhoComponent],
+            declarations: [app_component_1.AppComponent, cadastroUsuario_component_1.CadastroUsuarioComponent, menu_component_1.MenuComponent, contaUsuario_component_1.ContaUsuarioComponent, listagemMenu_component_1.ListagemMenuComponent, login_component_1.LoginComponent, ofertas_component_1.OfertasComponent, carrinho_component_1.CarrinhoComponent, listaProdutosCarrinho_component_1.ListaProdutosCarrinhoComponent],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

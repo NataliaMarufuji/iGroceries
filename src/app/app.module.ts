@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 import { PainelModule } from './painel/painel.module';
 import { CadastroUsuarioComponent } from './cadastroUsuario/cadastroUsuario.component';
 import { ListagemMenuComponent } from './listagemMenu/listagemMenu.component';
-import { ListagemUsuarioComponent } from './listagemUsuario/listagemUsuario.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { EnderecoComponent } from './endereco/endereco.component';
 import { EnderecoModule } from './endereco/endereco.module';
@@ -49,7 +48,7 @@ import { CarrinhoComponent } from './carrinho/carrinho.component';
         ServicesModule,
         OfertasModule
     ],
-    declarations: [ AppComponent,CadastroUsuarioComponent, ListagemUsuarioComponent, MenuComponent, ContaUsuarioComponent, ListagemMenuComponent, LoginComponent, OfertasComponent, CarrinhoComponent, ListaProdutosCarrinhoComponent ],
+    declarations: [ AppComponent,CadastroUsuarioComponent, MenuComponent, ContaUsuarioComponent, ListagemMenuComponent, LoginComponent, OfertasComponent, CarrinhoComponent, ListaProdutosCarrinhoComponent ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

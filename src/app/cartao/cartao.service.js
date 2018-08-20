@@ -14,7 +14,6 @@ var core_1 = require("@angular/core");
 var CartaoService = /** @class */ (function () {
     function CartaoService(http) {
         this._cardsList = [];
-        this.projectsKey = 'projects_key';
     }
     CartaoService.prototype.setCard = function (card) {
         this._card = card;

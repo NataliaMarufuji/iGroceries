@@ -17,9 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../usuario/usuario.service';
 import { ServicesService } from '../services/services.service';
 import { HelperService } from '../helper/helper.service';
-import { EnderecoService } from '../endereco/endereco.service';
 import { AutenticacaoService } from '../autenticacao/autenticacao.service';
-import { ProdutoComponent } from '../produto/produto.component';
 import { ServicesComponent } from '../services/services.component';
 import {Logger} from "../logger";
 
@@ -34,24 +32,22 @@ export class CadastroUsuarioComponent {
     usuario: UsuarioComponent = new UsuarioComponent();
     endereco: EnderecoComponent = new EnderecoComponent();
     autenticacao: AutenticacaoComponent = new AutenticacaoComponent();
-    service: UsuarioService;
-    service2: ServicesService;
-    service4: AutenticacaoService;
+    usuarioService: UsuarioService;
+    services: ServicesService;
+    autenticacaoService: AutenticacaoService;
     helperService: HelperService;
     route: ActivatedRoute;
     router: Router;
     requisicaoSendoRealizada: boolean;
     mensagem: string = '';
-    isEdicao: boolean = false;
     erro: boolean = false;
-    produtos: ProdutoComponent[] = [];
     
 
     constructor(helperService: HelperService, service: UsuarioService, fb: FormBuilder, route: ActivatedRoute, router: Router, service2: ServicesService,  service4: AutenticacaoService){
 
-        this.service = service;    
-        this.service2 = service2; 
-        this.service4 = service4;
+        this.usuarioService = service;    
+        this.services = service2; 
+        this.autenticacaoService = service4;
         this.helperService = helperService;
 
         this.route = route;
@@ -68,20 +64,20 @@ export class CadastroUsuarioComponent {
 
         if(this.validaCamposUsuario()){
             this.requisicaoSendoRealizada = true;
-            this.service2.cadastra(objetoParaService).subscribe(params => {
+            this.services.cadastra(objetoParaService).subscribe(params => {
                 this.usuario.endereco = params._id;
                 objetoParaService.url = "usuario";
                 objetoParaService.objeto = this.usuario;
 
-                this.service2.cadastra(objetoParaService).subscribe(params => {
+                this.services.cadastra(objetoParaService).subscribe(params => {
                     this.autenticacao.usuario = params._id;    
                     objetoParaService.url = "autenticacao";
                     objetoParaService.objeto = this.autenticacao;
 
-                    this.service2.cadastra(objetoParaService).subscribe(params => {
+                    this.services.cadastra(objetoParaService).subscribe(params => {
                         this.requisicaoSendoRealizada = false;
-                        this.service.setAutenticado(true);
-                        this.service.setUser(this.usuario);
+                        this.usuarioService.setAutenticado(true);
+                        this.usuarioService.setUser(this.usuario);
                         this.router.navigateByUrl("/menu");
                     });
                 });
@@ -120,7 +116,7 @@ export class CadastroUsuarioComponent {
             return;
         }
 
-        if(!this.service4.verificaSenhasIguais(this.autenticacao.senha, this.autenticacao.confirmaSenha)){
+        if(!this.autenticacaoService.verificaSenhasIguais(this.autenticacao.senha, this.autenticacao.confirmaSenha)){
             this.erro = true;
             this.mensagem = 'As senhas devem ser iguais';
             return;

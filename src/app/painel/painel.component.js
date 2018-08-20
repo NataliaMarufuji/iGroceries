@@ -22,11 +22,11 @@ var PainelComponent = /** @class */ (function () {
         this.serviceHelper = serviceHelper;
         this.serviceHelper.retornaScriptModal();
         this.router = router;
-        this.service = service;
-        this.productList = this.service.getProductList();
-        this.service2 = service2;
-        this.usuarioAutenticado = this.service2.getAutenticado();
-        this.service3 = service3;
+        this.produtoService = service;
+        this.productList = this.produtoService.getProductList();
+        this.usuarioService = service2;
+        this.usuarioAutenticado = this.usuarioService.getAutenticado();
+        this.listaProdutosCarrinhoService = service3;
         this.inicializaCombo();
     }
     PainelComponent.prototype.fadeOut = function (cb) {
@@ -38,9 +38,9 @@ var PainelComponent = /** @class */ (function () {
             return;
         }
         else {
-            var produto = this.service.buscaPorId(this.productList, this.productId);
+            var produto = this.produtoService.buscaPorId(this.productList, this.productId);
             var quantidadeAux = produto.quantidade;
-            var listaDeProdutos = this.service3.getProductList();
+            var listaDeProdutos = this.listaProdutosCarrinhoService.getProductList();
             produto.quantidade = parseInt(quantidade);
             produto.valorTotal = produto.valor * produto.quantidade;
             if (listaDeProdutos.includes(produto)) {
@@ -51,7 +51,7 @@ var PainelComponent = /** @class */ (function () {
             }
             else {
                 listaDeProdutos.push(produto);
-                this.service3.setProductList(listaDeProdutos);
+                this.listaProdutosCarrinhoService.setProductList(listaDeProdutos);
                 if (!this.usuarioAutenticado) {
                     this.router.navigateByUrl("/login");
                 }

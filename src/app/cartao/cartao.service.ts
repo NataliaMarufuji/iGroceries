@@ -8,7 +8,6 @@ export class CartaoService {
 
     private _card: CartaoComponent;
     private _cardsList: CartaoComponent[] = [];
-    private readonly projectsKey: string = 'projects_key';
     private _autenticado: boolean;
 
     constructor(http: Http) {}

@@ -37,7 +37,7 @@
           </div>
       </div>
     <painel #painel *ngFor="let produto of produtos" 
-    titulo="{{produto.nome | uppercase }}" productId="{{produto.id}}" imagemProduto="{{produto.foto}}" [ngClass]="{'col-md-6': menuLogin, 'col-md-3': !menuLogin}">
+    titulo="{{produto.nome | uppercase }}" productId="{{produto.id}}" imagemProduto="{{produto.foto}}">
     <produto valor="{{produto.valor}}" nome="{{produto.nome}}" quantidade="{{produto.quantidade}}" dataValidade="{{produto.validade | date: 'dd/MM/yyyy'}}"></produto> 
     </painel>
  </div>
